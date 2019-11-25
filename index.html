@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="style.css">
+    <title>Веб услуги</title>
+</head>
+<body>
+    <!-- v-cloak скрывает нескомпилированные элементы, пока сущность Vue.js не готова. -->
+
+<form id="main" v-cloak>
+
+	<h1>Услуги</h1>
+
+	<ul>
+		<!-- Цикл проходит по массиву услуг, присваивает обработчик для клика, и устанавливает или удаляет класс "active" -->
+		<li  v-for="service in services" v-on:click="toggleActive(service)" v-bind:class="{ 'active': service.active}">   <!--    -->
+			<!-- Показывает название и цену для каждого вложенного элемента.
+                Vue.js имеет встроенный фильтр валют для формирования цены -->
+			{{service.name}} <span>{{service.price | currency}}</span>
+			
+		</li>
+	
+		<button @click.prevent="addService()" class="add" >Добавить услугу</button>
+        <button @click.prevent="deleteService()" class="add" >Убрать услугу</button>
+	</ul>
+	  <hr>
+
+	<div class="total">
+		<!-- Высчитывает итоговую сумму -->
+		Итого: <span>{{total() | currency}}</span><br>
+		
+	</div>
+	
+	<pre>{{ $data }}</pre>
+
+
+</form>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
